@@ -22,7 +22,13 @@ public class PlayerController : MonoBehaviour {
 
 	private CharacterController2D _controller;
 	private AnimationController2D _animator;
+	private Rigidbody2D _rigidbody;
 	private int currentHealth = 0;
+
+	public bool knockedBack;
+	public float knockbackX = 20;
+	public float knockbackY = 10;
+	public float knockbackDuration = 1;
 
 
 	private GameObject nearbyObject;
@@ -31,6 +37,7 @@ public class PlayerController : MonoBehaviour {
 	void Start () {
 		_controller = gameObject.GetComponent<CharacterController2D>();
 		_animator = gameObject.GetComponent<AnimationController2D>();
+		_rigidbody = gameObject.GetComponent<Rigidbody2D>();
 		currentHealth = maxHealth;
 
 		playerHolding = null;
@@ -40,6 +47,11 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
+		if(knockedBack)
+		{
+			StartCoroutine("waitKnockback");
+		}
+
 		if(playerControl)
 		{
 			Vector3 velocity = PlayerInput();
@@ -109,7 +121,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		//velocity.x = 0;
 		
-		if(Input.GetAxis("Horizontal") < 0)
+		if(Input.GetAxis("Horizontal") < 0 && !knockedBack)
 		{
 			if(_controller.isGrounded)
 			{
@@ -123,7 +135,7 @@ public class PlayerController : MonoBehaviour {
 				playerHolding.GetComponent<ObjectFollow>().faceForward = false;
 			}
 		}
-		else if(Input.GetAxis("Horizontal") > 0)
+		else if(Input.GetAxis("Horizontal") > 0 && !knockedBack)
 		{
 			if(_controller.isGrounded)
 			{
@@ -148,7 +160,7 @@ public class PlayerController : MonoBehaviour {
 			velocity.y = Mathf.Sqrt (2f * jumpHeight *-gravity);
 		}
 		
-		velocity.x *= 0.90f;
+		velocity.x *= 0.8f;
 		
 		velocity.y += gravity*Time.deltaTime;
 
@@ -163,7 +175,7 @@ public class PlayerController : MonoBehaviour {
 		}
 		else if (col.tag == "Damaging")
 		{
-			PlayerDamage(25);
+			PlayerDamage(10);
 			if(playerLight.GetComponent<LightFollow>().currentlyHeld)
 			{
 			playerLight.GetComponent<LightFollow>().lightDamage(1);
@@ -171,11 +183,15 @@ public class PlayerController : MonoBehaviour {
 		}
 		else if(col.tag == "TrickDamaging")
 		{
-			PlayerDamage(25);
+			PlayerDamage(10);
+
+			/*
+			 * Not actually necessary to damage light here
 			if(playerLight.GetComponent<LightFollow>().currentlyHeld)
 			{
 				playerLight.GetComponent<LightFollow>().lightDamage(1);
 			}
+			*/
 		}
 		else if(col.tag == "Object")
 		{
@@ -209,10 +225,12 @@ public class PlayerController : MonoBehaviour {
 		currentHealth -= damage;
 		healthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(normalizedHealth()*256, 32);
 
+		Knockback();
 		if(currentHealth <= 0)
 		{
 			PlayerDeath();
 		}
+
 	}
 
 	private float normalizedHealth()
@@ -227,5 +245,28 @@ public class PlayerController : MonoBehaviour {
 
 		gameOverPanel.SetActive(true);
 	}
+
+	private void Knockback()
+	{
+		playerControl = false;
+		if(_animator.getFacing() == "Right")
+			{
+			_controller.move(new Vector2(-knockbackX, knockbackY)*Time.deltaTime);
+			}
+		else
+			{
+			_controller.move(new Vector2(knockbackX, knockbackY)*Time.deltaTime);
+			}
+		playerControl = true;
+		knockedBack = true;
+	}
+
+
+	private IEnumerator waitKnockback()
+	{
+		yield return  new WaitForSeconds(knockbackDuration);
+		knockedBack = false;
+	}
+
 
 }
