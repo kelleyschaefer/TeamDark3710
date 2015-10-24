@@ -7,9 +7,16 @@ public class ObjectFollow : MonoBehaviour {
 	public bool currentlyHeld;
 
 	public bool faceForward;
-	
+	//How far away the item should be "held" from the player.
+	public float holdOffset;
+
+	//What moving platform the object is attached to
 	public Transform objectGround;
+	public float offsetY;
+	public float offsetX;
+
 	private bool objectGrounded;
+	public bool isKey;
 
 
 	// Use this for initialization
@@ -21,19 +28,20 @@ public class ObjectFollow : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		//IMPORTANT*** REMEMBER TO KEEP IT'S Z POSITION BELOW THE LIGHTS OR IT WON'T BE LIT
 		if(currentlyHeld)
 		{
 			if(faceForward){
-				transform.position = new Vector3(player.position.x + 1.25f, player.position.y, player.position.z + -2);
+				transform.position = new Vector3(player.position.x + holdOffset, player.position.y, player.position.z + -2);
 				// Object follows the player with specified offset position
 			}
 			else{
-				transform.position = new Vector3(player.position.x - 1.25f, player.position.y, player.position.z + -2);
+				transform.position = new Vector3(player.position.x - holdOffset, player.position.y, player.position.z + -2);
 			}
 		}
 		else if(objectGrounded)
 		{
-			transform.position = new Vector3(objectGround.position.x, objectGround.position.y+1.25f, objectGround.position.z - 2);
+			transform.position = new Vector3(objectGround.position.x + offsetX, objectGround.position.y + offsetY, objectGround.position.z - 2);
 		}
 	
 	}
@@ -46,7 +54,12 @@ public class ObjectFollow : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D col)
 	{
-		//nothing yet
+		//If object is a key
+		if(col.tag == "Keyhole" && isKey)
+		{
+			col.gameObject.GetComponent<partnerObject>().activate();
+			Destroy (this.gameObject);
+		}
 	}
 
 	public bool nearbyPlayer()

@@ -6,9 +6,16 @@ public class LightFollow : MonoBehaviour {
 	public Transform player;
 	public Light lightSource;
 
-	public float currentLight = 5;
+	public float currentLight = 8;
+	public float maxLight = 8;
+
+	public float offsetX;
+	public float offsetY;
+	public float holdOffset;
 
 	public bool currentlyHeld = true;
+
+	public GameObject LightBar;
 
 	//True if player is facing right, False is player is facing left.
 	public bool faceForward;
@@ -39,16 +46,16 @@ public class LightFollow : MonoBehaviour {
 		if(currentlyHeld)
 		{
 			if(faceForward){
-			transform.position = new Vector3(player.position.x + 1.25f, player.position.y, player.position.z + -2);
+			transform.position = new Vector3(player.position.x + holdOffset, player.position.y, player.position.z + -2);
 			// Light follows the player with specified offset position
 			}
 			else{
-			transform.position = new Vector3(player.position.x - 1.25f, player.position.y, player.position.z + -2);
+			transform.position = new Vector3(player.position.x - holdOffset, player.position.y, player.position.z + -2);
 			}
 		}
 		else if(lightGrounded)
 		{
-			transform.position = new Vector3(lightGround.position.x, lightGround.position.y+1.25f, lightGround.position.z - 2);
+			transform.position = new Vector3(lightGround.position.x + offsetX, lightGround.position.y + offsetY, lightGround.position.z - 2);
 		}
 	}
 
@@ -62,11 +69,11 @@ public class LightFollow : MonoBehaviour {
 	{
 		if(col.tag == "LightDamaging")
 		{
-			lightDamage(1);
+			lightDamage(1f);
 		}
 		else if(col.tag == "Waterfall")
 		{
-			lightDamage(2);
+			lightDamage(2f);
 		}
 		else if(col.tag == "Lamp")
 		{
@@ -75,9 +82,7 @@ public class LightFollow : MonoBehaviour {
 			{
 				if(currentLight < 8)
 				{
-					currentLight += 1;
-					lightSource.intensity +=1f;
-					lightSource.range +=1f;
+					lightDamage(-1f);
 				}
 				player.GetComponent<PlayerController>().PlayerDamage(-25);
 			}
@@ -91,11 +96,19 @@ public class LightFollow : MonoBehaviour {
 				Destroy (col.gameObject);
 			}
 		}
+		else if(col.tag =="Enemy")
+		{
+			if(currentLight > 3)
+			{
+				col.gameObject.GetComponent<ChaserBehavior>().hitLight();
+				lightDamage(1f);
+			}
+		}
 	}
 
 	public bool nearbyPlayer()
 	{
-		if(Vector2.Distance (transform.position, player.position) <= 3)
+		if(Vector2.Distance (transform.position, player.position) <= 2)
 		{
 			return true;
 		}
@@ -103,14 +116,20 @@ public class LightFollow : MonoBehaviour {
 			return false;
 	}
 
-	public void lightDamage(int multiplier)
+	private float normalizedLight()
+	{
+		return (float)currentLight / (float)maxLight;
+	}
+
+	public void lightDamage(float damage)
 	{
 		if(currentLight < 2)
 		{
 			return;
 		}
-		currentLight -=1*multiplier;
-		lightSource.intensity-=1f*multiplier;
-		lightSource.range -= 1f*multiplier;
+		currentLight -= damage;
+		lightSource.intensity-= damage;
+		lightSource.range -= damage;
+		LightBar.GetComponent<RectTransform>().sizeDelta = new Vector2(normalizedLight()*256, 32);
 	}
 }
