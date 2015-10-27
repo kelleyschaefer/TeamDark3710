@@ -29,8 +29,6 @@ public class ButtonObject : MonoBehaviour {
 
 	void OnTriggerStay2D (Collider2D col)
 	{
-		if(!active)
-		{
 		if(col.tag == "Object" || col.tag == "Player")
 		{
 				if(col.tag == "Object")
@@ -52,12 +50,11 @@ public class ButtonObject : MonoBehaviour {
 				active = true;
 				partnerObject.GetComponent<partnerObject>().activate();
 			}
-			else if(timed)
+			else if(timed && !active)
 			{
 				partnerObject.GetComponent<partnerObject>().activate();
 				StartCoroutine("endActive");
 			}
-		}
 		}
 	}
 

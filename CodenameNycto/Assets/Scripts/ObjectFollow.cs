@@ -41,7 +41,7 @@ public class ObjectFollow : MonoBehaviour {
 		}
 		else if(objectGrounded)
 		{
-			transform.position = new Vector3(objectGround.position.x + offsetX, objectGround.position.y + offsetY, objectGround.position.z - 2);
+			transform.position = new Vector3(objectGround.position.x - offsetX, objectGround.position.y + offsetY, objectGround.position.z - 2);
 		}
 	
 	}
@@ -50,6 +50,7 @@ public class ObjectFollow : MonoBehaviour {
 	{
 		objectGround = ground;
 		objectGrounded = status;
+		offsetX = ground.position.x - player.position.x;
 	}
 
 	void OnTriggerEnter2D (Collider2D col)

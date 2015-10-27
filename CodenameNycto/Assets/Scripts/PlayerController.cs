@@ -89,6 +89,7 @@ public class PlayerController : MonoBehaviour {
 				{
 					playerLight.GetComponent<LightFollow>().followGround(_controller.ground.transform, true);
 					playerLight.GetComponent<LightFollow>().currentlyHeld = false;
+					playerLight.GetComponent<SpriteRenderer>().enabled = true;
 				}
 				//If we're holding an object (should NOT be holding Lantern) then have Object follow the platform
 				else if(playerHolding != null)
@@ -103,6 +104,7 @@ public class PlayerController : MonoBehaviour {
 			{
 				playerLight.GetComponent<LightFollow>().followGround(_controller.ground.transform, true);
 				playerLight.GetComponent<LightFollow>().currentlyHeld = false;
+				playerLight.GetComponent<SpriteRenderer>().enabled = true;
 			}
 
 			//Otherwise, put object down on non-moving platform, mark it as not held.
@@ -120,6 +122,7 @@ public class PlayerController : MonoBehaviour {
 			if(playerLight.GetComponent<LightFollow>().nearbyPlayer() && playerHolding == null)
 			{
 				playerLight.GetComponent<LightFollow>().currentlyHeld = true;
+				playerLight.GetComponent<SpriteRenderer>().enabled = false;
 			}
 			//Else, if there is an object within range ot be picked up, pick it up.
 			else if(playerHolding == null && nearbyObject !=null)
@@ -218,6 +221,7 @@ public class PlayerController : MonoBehaviour {
 		if(col.tag == "LevelGoal")
 		{
 			playerControl = false;
+			RenderSettings.ambientLight = Color.red;
 			FinishedLevel.SetActive(true);
 		}
 	}

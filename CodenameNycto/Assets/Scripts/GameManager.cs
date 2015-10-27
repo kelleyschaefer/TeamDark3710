@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour {
 
 	public void Play()
 	{
-		Application.LoadLevel("PrototypeLevel");
+		Application.LoadLevel("Level1");
 	}
 
 	public void ExitGame()

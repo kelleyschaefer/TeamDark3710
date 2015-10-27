@@ -28,6 +28,7 @@ public class LightFollow : MonoBehaviour {
 		currentlyHeld = true;
 		lightSource = GetComponent<Light>();
 		currentLight = lightSource.intensity;
+		this.GetComponent<SpriteRenderer>().enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -55,7 +56,7 @@ public class LightFollow : MonoBehaviour {
 		}
 		else if(lightGrounded)
 		{
-			transform.position = new Vector3(lightGround.position.x + offsetX, lightGround.position.y + offsetY, lightGround.position.z - 2);
+			transform.position = new Vector3(lightGround.position.x - offsetX, lightGround.position.y + offsetY, lightGround.position.z - 2);
 		}
 	}
 
@@ -63,6 +64,7 @@ public class LightFollow : MonoBehaviour {
 	{
 		lightGround = ground;
 		lightGrounded = status;
+		offsetX = (lightGround.position.x - player.position.x);
 	}
 
 	void OnTriggerEnter2D (Collider2D col)
@@ -123,7 +125,7 @@ public class LightFollow : MonoBehaviour {
 
 	public void lightDamage(float damage)
 	{
-		if(currentLight < 2)
+		if(currentLight < 2 && damage > 0)
 		{
 			return;
 		}
