@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour {
 	public float walkSpeed = 3;
 	public int maxHealth = 100;
 	public bool invincible;
+	public bool nearLadder;
+	public bool onLadder;
 
 	public GameObject gameOverPanel;
 	public GameObject FinishedLevel;
@@ -43,6 +45,8 @@ public class PlayerController : MonoBehaviour {
 		playerHolding = null;
 		nearbyObject = null;
 		invincible = false;
+		onLadder = false;
+		nearLadder = false;
 	}
 	
 	// Update is called once per frame
@@ -63,6 +67,15 @@ public class PlayerController : MonoBehaviour {
 
 	private Vector3 PlayerInput()
 	{
+		if(!nearLadder || _controller.isGrounded)
+		{
+			onLadder = false;
+		}
+		if(!onLadder)
+		{
+			gravity = -35;
+		}
+
 		Vector3 velocity = _controller.velocity;
 
 		//If we're grounded and the ground is a moving platform, move with the platform
@@ -133,7 +146,7 @@ public class PlayerController : MonoBehaviour {
 		}
 
 		//Facing left and not currently knocked back
-		if(Input.GetAxis("Horizontal") < 0 && !knockedBack)
+		if(Input.GetAxis("Horizontal") < 0 && !knockedBack && !onLadder)
 		{
 			if(_controller.isGrounded)
 			{
@@ -148,7 +161,7 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 		//Facing right and not currently knocked back
-		else if(Input.GetAxis("Horizontal") > 0 && !knockedBack)
+		else if(Input.GetAxis("Horizontal") > 0 && !knockedBack && !onLadder)
 		{
 			if(_controller.isGrounded)
 			{
@@ -173,10 +186,24 @@ public class PlayerController : MonoBehaviour {
 			velocity.y = Mathf.Sqrt (2f * jumpHeight *-gravity);
 		}
 
+		if(Input.GetAxis ("Vertical") > 0 && !playerHolding && !playerLight.GetComponent<LightFollow>().currentlyHeld && nearLadder)
+		{
+			onLadder = true;
+			Vector2 upVector = new Vector2(0, 5);
+			this.transform.Translate(upVector*Time.deltaTime);
+			gravity = 0;
+		}
+		if(Input.GetAxis("Vertical") < 0 && !playerHolding && !playerLight.GetComponent<LightFollow>().currentlyHeld && nearLadder)
+		{
+			_controller.ignoreOneWayPlatformsThisFrame = true;
+			velocity.y = -walkSpeed;
+		}
+
 		//Simulate gravity
 		velocity.x *= 0.8f;
 		
 		velocity.y += gravity*Time.deltaTime;
+
 
 		return velocity;
 	}
@@ -218,6 +245,10 @@ public class PlayerController : MonoBehaviour {
 		{
 			PlayerDamage (25);
 		}
+		if(col.tag == "Ladder")
+		{
+			nearLadder = true;
+		}
 		if(col.tag == "LevelGoal")
 		{
 			playerControl = false;
@@ -231,6 +262,10 @@ public class PlayerController : MonoBehaviour {
 		if(col.tag =="Object")
 		{
 			nearbyObject = null;
+		}
+		if(col.tag == "Ladder")
+		{
+			nearLadder = false;
 		}
 	}
 
