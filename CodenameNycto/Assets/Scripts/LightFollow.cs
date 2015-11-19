@@ -8,6 +8,8 @@ public class LightFollow : MonoBehaviour {
 
 	public float currentLight = 8;
 	public float maxLight = 8;
+	public float maxRange = 10;
+	public int lampHeal = 50;
 
 	public float offsetX;
 	public float offsetY;
@@ -86,7 +88,7 @@ public class LightFollow : MonoBehaviour {
 				{
 					lightDamage(-1f);
 				}
-				player.GetComponent<PlayerController>().PlayerDamage(-25);
+				player.GetComponent<PlayerController>().PlayerDamage(-lampHeal);
 			}
 
 			col.GetComponentInParent<LampCollision>().lightUp();
@@ -121,6 +123,15 @@ public class LightFollow : MonoBehaviour {
 	private float normalizedLight()
 	{
 		return (float)currentLight / (float)maxLight;
+	}
+
+	public void refill()
+	{
+		currentLight = maxLight;
+		lightSource.intensity = maxLight;
+		lightSource.range = maxRange;
+		LightBar.GetComponent<RectTransform> ().sizeDelta = new Vector2 (normalizedLight () * 256, 32);
+		Debug.Log ("refilling light");
 	}
 
 	public void lightDamage(float damage)

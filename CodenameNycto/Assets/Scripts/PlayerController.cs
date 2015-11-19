@@ -13,8 +13,10 @@ public class PlayerController : MonoBehaviour {
 	public bool nearLadder;
 	public bool onLadder;
 
+
 	public GameObject gameOverPanel;
 	public GameObject FinishedLevel;
+	public GameObject gameManager;
 
 	public GameObject healthBar;
 
@@ -47,6 +49,10 @@ public class PlayerController : MonoBehaviour {
 		invincible = false;
 		onLadder = false;
 		nearLadder = false;
+		if(PlayerPrefs.GetInt("Checkpoint") == 1)
+		{
+			this.transform.position = new Vector2(PlayerPrefs.GetFloat("xPosition"), PlayerPrefs.GetFloat("yPosition"));
+		}
 	}
 	
 	// Update is called once per frame
@@ -237,10 +243,12 @@ public class PlayerController : MonoBehaviour {
 			}
 			*/
 		}
+		//Interactable object, either key or otherwise
 		else if(col.tag == "Object")
 		{
 			nearbyObject = col.gameObject;
 		}
+		//Damaging enemy, either Chaser or Follower
 		else if(col.tag =="Enemy")
 		{
 			PlayerDamage (25);
@@ -249,6 +257,21 @@ public class PlayerController : MonoBehaviour {
 		{
 			nearLadder = true;
 		}
+		if (col.tag == "LightRefill") 
+		{
+			playerLight.GetComponent<LightFollow>().refill();
+			Debug.Log ("finished refill");
+		}
+		//Player checkpoint, resets spawn location for this instance.
+		if (col.tag == "Checkpoint") 
+		{
+			PlayerPrefs.SetFloat ("xPosition", col.gameObject.transform.position.x);
+			PlayerPrefs.SetFloat ("yPosition", col.gameObject.transform.position.y +1f);
+			PlayerPrefs.SetInt ("Checkpoint", 1);
+			Debug.Log ("Hit checkpoint");
+
+		}
+		//End of level!
 		if(col.tag == "LevelGoal")
 		{
 			playerControl = false;

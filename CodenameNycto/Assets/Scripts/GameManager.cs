@@ -3,9 +3,9 @@ using System.Collections;
 
 public class GameManager : MonoBehaviour {
 
+
 	// Use this for initialization
 	void Start () {
-	
 	}
 	
 	// Update is called once per frame
@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour {
 
 	public void ExitLevel()
 	{
+		PlayerPrefs.SetInt ("Checkpoint", 0);
 		Application.LoadLevel("MainMenu");
 	}
 
@@ -30,6 +31,7 @@ public class GameManager : MonoBehaviour {
 
 	public void ExitGame()
 	{
+		PlayerPrefs.SetInt ("Checkpoint", 0);
 		Application.Quit();
 	}
 
@@ -37,6 +39,7 @@ public class GameManager : MonoBehaviour {
 	{
 		/*
 		 * TODO: Save file */
+		PlayerPrefs.SetInt ("Checkpoint", 0);
 		Application.Quit ();
 	}
 
@@ -46,7 +49,9 @@ public class GameManager : MonoBehaviour {
 		 * TODO: Save file */
 		int level = Application.loadedLevel;
 
+
 		//ORGANIZE LEVELS BY NUMBER, VERY IMPORTANT
+		PlayerPrefs.SetInt ("Checkpoint", 0);
 		level++;
 		Application.LoadLevel(level);
 	}
@@ -55,6 +60,7 @@ public class GameManager : MonoBehaviour {
 	{
 		/*
 		 * TODO: Save file */
+		PlayerPrefs.SetInt ("Checkpoint", 0);
 		Application.LoadLevel ("MainMenu");
 	}
 }
