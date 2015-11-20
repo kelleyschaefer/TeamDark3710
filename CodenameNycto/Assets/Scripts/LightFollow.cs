@@ -9,7 +9,7 @@ public class LightFollow : MonoBehaviour {
 	public float currentLight = 8;
 	public float maxLight = 8;
 	public float maxRange = 10;
-	public int lampHeal = 50;
+	public int lampHeal = 25;
 
 	public float offsetX;
 	public float offsetY;
@@ -30,7 +30,6 @@ public class LightFollow : MonoBehaviour {
 		currentlyHeld = true;
 		lightSource = GetComponent<Light>();
 		currentLight = lightSource.intensity;
-		this.GetComponent<SpriteRenderer>().enabled = false;
 	}
 	
 	// Update is called once per frame
