@@ -4,7 +4,7 @@ using System.Collections;
 public class GameManager : MonoBehaviour {
 
 
-	// Use this for initialization
+	// Use this for initializations
 	void Start () {
 	}
 	
