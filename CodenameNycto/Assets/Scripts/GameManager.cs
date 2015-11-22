@@ -1,16 +1,32 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 
+	public GameObject Level1Button;
+
+	private List<string> UnlockedLevels;
 
 	// Use this for initializations
 	void Start () {
+		UnlockedLevels = new List <string>();
+		UnlockedLevels.Add("PrototypeLevel");
+		UnlockedLevels.Add("Level1");
+
+		LevelSelectPopulate();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
+	}
+
+	public void LevelSelectPopulate()
+	{
+		foreach (string s in UnlockedLevels)
+		{
+
+		}
 	}
 
 	public void RestartLevel()
