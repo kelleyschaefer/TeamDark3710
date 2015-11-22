@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour {
 		Application.LoadLevel("MainMenu");
 	}
 
-	public void Play()
+	public void NewGame()
 	{
 		Application.LoadLevel("Level1");
 	}
