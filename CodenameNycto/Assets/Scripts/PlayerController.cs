@@ -250,7 +250,7 @@ public class PlayerController : MonoBehaviour {
 		//Damaging enemy, either Chaser or Follower
 		else if(col.tag =="Enemy")
 		{
-			PlayerDamage (1);
+			PlayerDamage (2);
 		}
 		if(col.tag == "Ladder")
 		{
@@ -271,7 +271,12 @@ public class PlayerController : MonoBehaviour {
 
 		}
 		//End of level!
-		if(col.tag == "LevelGoal")
+
+		if(col.tag == "Follower")
+		{
+			PlayerDeath();
+		}
+		if(col.tag == "LevelGoal" && playerLight.GetComponent<LightFollow>().currentlyHeld)
 		{
 			playerControl = false;
 			RenderSettings.ambientLight = Color.red;
@@ -296,7 +301,9 @@ public class PlayerController : MonoBehaviour {
 	private void PlayerFallDeath()
 	{
 		currentHealth = 0;
-		healthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(normalizedHealth()*256, 32);
+		_animator.setAnimation("Hurt");
+		playerControl = false;
+		healthBar.GetComponent<Image>().sprite = healthBars[0];
 		gameCamera.GetComponent<CameraFollow>().stopFollow();
 		playerControl = false;
 		gameOverPanel.SetActive(true);
@@ -343,8 +350,9 @@ public class PlayerController : MonoBehaviour {
 	//Stop control, set Gameover
 	private void PlayerDeath()
 	{
-		_animator.setAnimation("Player_death");
+		_animator.setAnimation("Hurt");
 		playerControl = false;
+		healthBar.GetComponent<Image>().sprite = healthBars[0];
 
 		gameOverPanel.SetActive(true);
 	}

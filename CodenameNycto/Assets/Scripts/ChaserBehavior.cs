@@ -8,6 +8,7 @@ public class ChaserBehavior : MonoBehaviour {
 	public float aggroSpeed = 4;
 	public float nonAggroSpeed = 1;
 	public float aggroDistance = 6;
+	public GameObject lantern;
 	public GameObject player;
 
 	public bool aggro = false;
@@ -35,6 +36,7 @@ public class ChaserBehavior : MonoBehaviour {
 	//Update is called once per frame
 	void Update()
 	{
+
 		if(Vector2.Distance(this.transform.position, player.transform.position) < aggroDistance)
 		{
 			if(speed > 0)
@@ -46,7 +48,7 @@ public class ChaserBehavior : MonoBehaviour {
 				speed = -aggroSpeed;
 			}
 		}
-		else if(speed == aggroSpeed)
+		else if(speed == aggroSpeed || speed == -aggroSpeed)
 		{
 			if(speed > 0 )
 			{
@@ -56,24 +58,50 @@ public class ChaserBehavior : MonoBehaviour {
 			{
 				speed = -nonAggroSpeed;
 			}
+			this.transform.Translate(speed, 0 , 0);
+			return;
 
 		}
 
-		if(this.transform.position.x <= _startPosition.x)
+		else if(this.transform.position.x <= _startPosition.x || this.transform.position.x >= endPosition.x && (speed != aggroSpeed && speed != -aggroSpeed))
 		{
-			speed = -speed;
-		}
-		else if(this.transform.position.x >= endPosition.x)
-		{
-			speed = -speed;
+			if(this.transform.position.x <= _startPosition.x)
+			{
+				this.transform.position = _startPosition;
+				speed = -speed;
+			}
+			else
+			{
+				this.transform.position = endPosition;
+				speed = -speed;
+			}
 		}
 
 		this.transform.Translate(speed, 0 , 0);
+
+
 	}
 
 	public void hitLight()
 	{
-		speed = -speed;
+		this.enabled = false;
+		StartCoroutine("pause");
+	}
+
+	private bool playerFace()
+	{
+		if(lantern.GetComponent<LightFollow>().faceForward)
+		{
+			return false;
+		}
+		else
+			return true;
+	}
+
+	IEnumerator pause()
+	{
+		yield return new WaitForSeconds(1.5f);
+		this.enabled = true;
 	}
 
 

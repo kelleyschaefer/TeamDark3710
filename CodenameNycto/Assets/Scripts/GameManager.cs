@@ -18,8 +18,9 @@ public class GameManager : MonoBehaviour {
 	// Use this for initializations
 	void Start () {
 		unlockedLevels = new List <string>();
-		unlockedLevels.Add("PrototypeLevel");
-		unlockedLevels.Add("Level1");
+		//unlockedLevels.Add("PrototypeLevel");
+		//unlockedLevels.Add("Level1");
+		unlockedLevels.Add("Tutorial");
 
 		toggleWindow = false;
 		hasFocus = false;
@@ -65,6 +66,10 @@ public class GameManager : MonoBehaviour {
 		if (GUILayout.Button ("Level 1")){
 			Application.LoadLevel (2);
 		}
+		if(GUILayout.Button ("Tutorial"))
+		{
+			Application.LoadLevel(3);
+		}
 	}
 
 	public void LevelSelectPopulate(){
@@ -81,13 +86,10 @@ public class GameManager : MonoBehaviour {
 		PlayerPrefs.SetInt ("Checkpoint", 0);
 		Application.LoadLevel("MainMenu");
 	}
-
-    public void NewGame()
-    {
-        PlayerPrefs.SetInt("Checkpoint", 0);
-    }
-	public void NewGame(){
-		Application.LoadLevel("Level1");
+	public void NewGame()
+	{
+		PlayerPrefs.SetInt("Checkpoint", 0);
+		Application.LoadLevel("Tutorial");
 	}
 
 	public void ExitGame(){
