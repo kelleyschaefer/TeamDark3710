@@ -59,7 +59,12 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void window(int windowID) {
-		//draw the window
+		if (GUILayout.Button("Prototype Level")){
+			Application.LoadLevel(1);
+		}
+		if (GUILayout.Button ("Level 1")){
+			Application.LoadLevel (2);
+		}
 	}
 
 	public void LevelSelectPopulate(){
@@ -112,3 +117,8 @@ public class GameManager : MonoBehaviour {
 		Application.LoadLevel ("MainMenu");
 	}
 }
+
+
+
+
+//Add cancel button to level select menu
