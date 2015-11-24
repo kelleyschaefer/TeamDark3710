@@ -11,8 +11,7 @@ public class ChaserBehavior : MonoBehaviour {
 	public GameObject player;
 
 	public bool aggro = false;
-	
-	private float _timer = 0;
+
 	public Vector2 _startPosition  = Vector2.zero;
 	public bool outgoing = true;
 	

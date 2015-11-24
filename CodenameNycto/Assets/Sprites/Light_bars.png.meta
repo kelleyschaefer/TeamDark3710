@@ -1,0 +1,143 @@
+fileFormatVersion: 2
+guid: fd43f7d0f2b59b74ba789ecdadf4d1e3
+timeCreated: 1448349136
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: LightFull
+    21300002: Light7
+    21300004: Light6
+    21300006: Light5
+    21300008: Light4
+    21300010: Light3
+    21300012: Light2
+    21300014: Light1
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: .25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 8
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: .5, y: .5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: LightFull
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 0
+        width: 184
+        height: 49
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Light7
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 0
+        width: 184
+        height: 49
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Light6
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 0
+        width: 184
+        height: 49
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Light5
+      rect:
+        serializedVersion: 2
+        x: 603
+        y: 0
+        width: 184
+        height: 49
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Light4
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 0
+        width: 184
+        height: 49
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Light3
+      rect:
+        serializedVersion: 2
+        x: 1003
+        y: 0
+        width: 184
+        height: 49
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Light2
+      rect:
+        serializedVersion: 2
+        x: 1203
+        y: 0
+        width: 184
+        height: 49
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Light1
+      rect:
+        serializedVersion: 2
+        x: 1403
+        y: 0
+        width: 184
+        height: 49
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

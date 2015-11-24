@@ -8,10 +8,12 @@ public class PlayerController : MonoBehaviour {
 	public float gravity = -35;
 	public float jumpHeight = 3;
 	public float walkSpeed = 3;
-	public int maxHealth = 100;
+	public int maxHealth = 8;
 	public bool invincible;
 	public bool nearLadder;
 	public bool onLadder;
+
+	public Sprite[] healthBars;
 
 
 	public GameObject gameOverPanel;
@@ -28,7 +30,7 @@ public class PlayerController : MonoBehaviour {
 
 	private CharacterController2D _controller;
 	private AnimationController2D _animator;
-	private int currentHealth = 0;
+	public int currentHealth = 0;
 
 	public bool knockedBack;
 	public float knockbackX = 20;
@@ -153,7 +155,7 @@ public class PlayerController : MonoBehaviour {
 		{
 			if(_controller.isGrounded)
 			{
-				_animator.setAnimation("Player_run");
+				_animator.setAnimation("Walk");
 			}
 			velocity.x = -walkSpeed;
 			_animator.setFacing("Left");
@@ -168,7 +170,7 @@ public class PlayerController : MonoBehaviour {
 		{
 			if(_controller.isGrounded)
 			{
-				_animator.setAnimation("Player_run");
+				_animator.setAnimation("Walk");
 			}
 			velocity.x = walkSpeed;
 			_animator.setFacing("Right");
@@ -181,11 +183,11 @@ public class PlayerController : MonoBehaviour {
 		else
 		{
 			if(_controller.isGrounded)
-				_animator.setAnimation("Player_idle");
+				_animator.setAnimation("Idle");
 		}
 		if(Input.GetAxis("Jump") > 0 && _controller.isGrounded)
 		{
-			_animator.setAnimation("Player_jump");
+			_animator.setAnimation("Jump");
 			velocity.y = Mathf.Sqrt (2f * jumpHeight *-gravity);
 		}
 
@@ -221,7 +223,7 @@ public class PlayerController : MonoBehaviour {
 		//Player touched something damaging
 		else if (col.tag == "Damaging" && !invincible)
 		{
-			PlayerDamage(25);
+			PlayerDamage(1);
 			if(playerLight.GetComponent<LightFollow>().currentlyHeld)
 			{
 			playerLight.GetComponent<LightFollow>().lightDamage(1);
@@ -230,7 +232,7 @@ public class PlayerController : MonoBehaviour {
 		//In this case, the player touched a trick obstacles -without- their lantern destroying it.
 		else if(col.tag == "TrickDamaging" && !invincible)
 		{
-			PlayerDamage(25);
+			PlayerDamage(1);
 
 			/*
 			 * Not actually necessary to damage light here
@@ -248,7 +250,7 @@ public class PlayerController : MonoBehaviour {
 		//Damaging enemy, either Chaser or Follower
 		else if(col.tag =="Enemy")
 		{
-			PlayerDamage (25);
+			PlayerDamage (1);
 		}
 		if(col.tag == "Ladder")
 		{
@@ -257,7 +259,7 @@ public class PlayerController : MonoBehaviour {
 		if (col.tag == "LightRefill") 
 		{
 			playerLight.GetComponent<LightFollow>().refill();
-			Debug.Log ("finished refill");
+			col.gameObject.GetComponent<RefillEffect>().partEffect();
 		}
 		//Player checkpoint, resets spawn location for this instance.
 		if (col.tag == "Checkpoint") 
@@ -265,7 +267,7 @@ public class PlayerController : MonoBehaviour {
 			PlayerPrefs.SetFloat ("xPosition", col.gameObject.transform.position.x);
 			PlayerPrefs.SetFloat ("yPosition", col.gameObject.transform.position.y +1f);
 			PlayerPrefs.SetInt ("Checkpoint", 1);
-			Debug.Log ("Hit checkpoint");
+			col.gameObject.GetComponent<CheckpointEffect>().Activate();
 
 		}
 		//End of level!
@@ -274,6 +276,7 @@ public class PlayerController : MonoBehaviour {
 			playerControl = false;
 			RenderSettings.ambientLight = Color.red;
 			FinishedLevel.SetActive(true);
+			PlayerPrefs.SetInt("Checkpoint", 0);
 		}
 	}
 
@@ -303,23 +306,30 @@ public class PlayerController : MonoBehaviour {
 	//Also induces knockback and death if applicable.
 	public void PlayerDamage(int damage)
 	{
+		
 		if(currentHealth == maxHealth && damage < 0)
 		{
 			return;
 		}
-		if(currentHealth - damage > maxHealth)
-		{
-		currentHealth -= damage;
-		healthBar.GetComponent<RectTransform>().sizeDelta = new Vector2(normalizedHealth()*256, 32);
-		}
 
-		if(damage > 0)
+		if(damage < 0)
 		{
-		Knockback();
+			currentHealth -= damage;
+			healthBar.GetComponent<Image>().sprite = healthBars[currentHealth-1];
+			return;
 		}
-		if(currentHealth <= 0)
+		else
 		{
-			PlayerDeath();
+			currentHealth -= damage;
+			if(currentHealth <= 0)
+			{
+				PlayerDeath();
+			}
+			else if(damage > 0)
+			{
+			healthBar.GetComponent<Image>().sprite = healthBars[currentHealth-1];
+			Knockback();
+			}
 		}
 
 	}
@@ -344,6 +354,7 @@ public class PlayerController : MonoBehaviour {
 	{
 		//Make sure the player can't move (otherwise they'll just bounce on top of damage continually)
 		playerControl = false;
+		_animator.setAnimation("Hurt");
 		//Easiest way is just to tell where we're facing based off of what we already set in movement
 		if(_animator.getFacing() == "Right")
 			{
@@ -371,6 +382,7 @@ public class PlayerController : MonoBehaviour {
 		yield return  new WaitForSeconds(knockbackDuration);
 		knockedBack = false;
 		StartCoroutine("stopInvincibility");
+
 	}
 
 	private IEnumerator stopInvincibility()

@@ -13,12 +13,17 @@ public class ButtonObject : MonoBehaviour {
 	public bool playerLeft;
 	public bool objectLeft;
 
+	public Sprite onButton;
+	public Sprite offButton;
+
 	public GameObject partnerObject;
+	public SpriteRenderer _SpriteRend;
 
 	// Use this for initialization
 	void Start () {
 		playerLeft = true;
 		objectLeft = true;
+		_SpriteRend = this.GetComponent<SpriteRenderer>();
 	
 	}
 	
@@ -43,15 +48,18 @@ public class ButtonObject : MonoBehaviour {
 			{
 				//ACTIVATE BUTTON
 				active = true;
+				_SpriteRend.sprite = onButton;
 				partnerObject.GetComponent<partnerObject>().activate();
 			}
 			else if(heldDown)
 			{
 				active = true;
+				_SpriteRend.sprite = onButton;
 				partnerObject.GetComponent<partnerObject>().activate();
 			}
 			else if(timed && !active)
 			{
+				_SpriteRend.sprite = onButton;
 				partnerObject.GetComponent<partnerObject>().activate();
 				StartCoroutine("endActive");
 			}
@@ -73,6 +81,7 @@ public class ButtonObject : MonoBehaviour {
 			if(playerLeft && objectLeft)
 			{
 				active = false;
+				_SpriteRend.sprite = offButton;
 				partnerObject.GetComponent<partnerObject>().deactivate();
 			}
 		}
@@ -83,6 +92,7 @@ public class ButtonObject : MonoBehaviour {
 	{
 		yield return new WaitForSeconds(timeActive);
 		active = false;
+		_SpriteRend.sprite = offButton;
 		partnerObject.GetComponent<partnerObject>().deactivate();
 
 	}

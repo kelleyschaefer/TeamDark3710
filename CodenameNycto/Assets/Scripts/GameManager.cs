@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour {
 
 	public void NewGame()
 	{
+		PlayerPrefs.SetInt ("Checkpoint", 0);
 		Application.LoadLevel("Level1");
 	}
 
