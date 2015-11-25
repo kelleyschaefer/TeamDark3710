@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour {
 		//play = GetComponent<ButtonObject>();
 
 		width = Screen.width;
-		levelSelectWindow = new Rect((width/2 - ((width/2f))/2f),(Screen.height/10),width/2f,width/1.5f);
+		levelSelectWindow = new Rect((width/2 - ((width/2f))/2f),(Screen.height/8f),width/2f,width/1.5f);
 	}
 	
 	// Update is called once per frame
@@ -60,15 +60,11 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void window(int windowID) {
-		if (GUILayout.Button("Prototype Level")){
+		if (GUILayout.Button("Tutorial")){
 			Application.LoadLevel(1);
 		}
 		if (GUILayout.Button ("Level 1")){
 			Application.LoadLevel (2);
-		}
-		if(GUILayout.Button ("Tutorial"))
-		{
-			Application.LoadLevel(3);
 		}
 	}
 
@@ -128,3 +124,6 @@ public class GameManager : MonoBehaviour {
 
 
 //Add cancel button to level select menu
+//Add save
+//Add load
+//Add levels beaten functionality 
