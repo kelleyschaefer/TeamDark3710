@@ -66,6 +66,9 @@ public class GameManager : MonoBehaviour {
 		if (GUILayout.Button ("Level 1")){
 			Application.LoadLevel (2);
 		}
+		if (GUILayout.Button ("Cancel")){
+			Application.LoadLevel ("MainMenu");
+		}
 	}
 
 	public void LevelSelectPopulate(){
@@ -122,8 +125,7 @@ public class GameManager : MonoBehaviour {
 
 
 
-
-//Add cancel button to level select menu
+//Add pause menu
 //Add save
 //Add load
 //Add levels beaten functionality 
