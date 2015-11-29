@@ -8,8 +8,7 @@ public class GameManager : MonoBehaviour {
 	public GameObject play;
 	public GameObject levelSelect;
 	public GameObject exit;
-
-	private bool hasFocus;
+	
 	private bool toggleWindow;
 	private float width;
 	private List<string> unlockedLevels;
@@ -23,12 +22,9 @@ public class GameManager : MonoBehaviour {
 		unlockedLevels.Add("Tutorial");
 
 		toggleWindow = false;
-		hasFocus = false;
-
-		//play = GetComponent<ButtonObject>();
 
 		width = Screen.width;
-		levelSelectWindow = new Rect((width/2 - ((width/2f))/2f),(Screen.height/8f),width/2f,width/1.5f);
+		levelSelectWindow = new Rect((width/2 - ((width/3f))/2f),(Screen.height/8f),width/3f,width/4f);
 	}
 	
 	// Update is called once per frame
