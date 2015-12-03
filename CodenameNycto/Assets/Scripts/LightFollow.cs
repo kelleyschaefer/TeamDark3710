@@ -139,6 +139,8 @@ public class LightFollow : MonoBehaviour {
 		lightSource.intensity = (float)(maxLight);
 		lightSource.range = (float)(maxRange);
 		lightBar.GetComponent<Image>().sprite = lightBars[currentLight-1];
+		changeColor ();
+
 	}
 
 	public void lightDamage(int damage)
@@ -148,8 +150,26 @@ public class LightFollow : MonoBehaviour {
 			return;
 		}
 		currentLight -= (damage);
-		lightSource.intensity-= (float)(damage);
-		lightSource.range -= (float)(damage);
+		//lightSource.intensity-= (float)(damage);
+		//lightSource.range -= (float)(damage);
 		lightBar.GetComponent<Image>().sprite = lightBars[currentLight-1];
+		changeColor();
+	}
+
+	public void changeColor()
+	{
+		if(currentLight <= 3)
+		{
+			lightSource.color = Color.red;
+		}
+		else if(currentLight > 3 && currentLight < 6)
+		{
+			lightSource.color = Color.yellow;
+		}
+		else
+		{
+			lightSource.color = Color.white;
+		}
 	}
 }
+

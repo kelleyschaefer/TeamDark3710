@@ -248,7 +248,7 @@ public class PlayerController : MonoBehaviour {
 			nearbyObject = col.gameObject;
 		}
 		//Damaging enemy, either Chaser or Follower
-		else if(col.tag =="Enemy")
+		else if(col.tag =="Enemy" && !invincible)
 		{
 			PlayerDamage (2);
 		}
@@ -376,10 +376,6 @@ public class PlayerController : MonoBehaviour {
 		//Set to true for control delay.
 		knockedBack = true;
 		//Player temporarily invincible from damage
-		/*
-		 * TODO: Add flashing animation??
-		 * 
-		 * */
 		invincible = true;
 	}
 

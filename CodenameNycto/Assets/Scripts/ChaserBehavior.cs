@@ -11,6 +11,8 @@ public class ChaserBehavior : MonoBehaviour {
 	public GameObject lantern;
 	public GameObject player;
 
+	private bool lightHit;
+
 	public bool aggro = false;
 
 	public Vector2 _startPosition  = Vector2.zero;
@@ -30,6 +32,8 @@ public class ChaserBehavior : MonoBehaviour {
 			aggroSpeed = aggroSpeed/distance;
 			speed = nonAggroSpeed;
 		}
+
+		lightHit = false;
 		
 	}
 
@@ -37,46 +41,32 @@ public class ChaserBehavior : MonoBehaviour {
 	void Update()
 	{
 
-		if(Vector2.Distance(this.transform.position, player.transform.position) < aggroDistance)
+		if(Vector2.Distance(this.transform.position, player.transform.position) < aggroDistance && !lightHit)
 		{
-			if(speed > 0)
+			this.transform.LookAt(player.transform);
+			if(this.transform.position.x - player.transform.position.x < 1)
 			{
-			speed = aggroSpeed;
+				speed = aggroSpeed;
 			}
 			else
 			{
 				speed = -aggroSpeed;
 			}
 		}
-		else if(speed == aggroSpeed || speed == -aggroSpeed)
-		{
-			if(speed > 0 )
-			{
-				speed = nonAggroSpeed;
-			}
-			else
-			{
-				speed = -nonAggroSpeed;
-			}
-			this.transform.Translate(speed, 0 , 0);
-			return;
 
-		}
-
-		else if(this.transform.position.x <= _startPosition.x || this.transform.position.x >= endPosition.x && (speed != aggroSpeed && speed != -aggroSpeed))
+		else if(this.transform.position.x <= _startPosition.x || this.transform.position.x >= endPosition.x)
 		{
 			if(this.transform.position.x <= _startPosition.x)
 			{
 				this.transform.position = _startPosition;
-				speed = -speed;
+				speed = -nonAggroSpeed;
 			}
 			else
 			{
 				this.transform.position = endPosition;
-				speed = -speed;
+				speed = -nonAggroSpeed;
 			}
 		}
-
 		this.transform.Translate(speed, 0 , 0);
 
 
@@ -84,7 +74,8 @@ public class ChaserBehavior : MonoBehaviour {
 
 	public void hitLight()
 	{
-		this.enabled = false;
+		lightHit = true;
+		speed = 0;
 		StartCoroutine("pause");
 	}
 
@@ -101,7 +92,8 @@ public class ChaserBehavior : MonoBehaviour {
 	IEnumerator pause()
 	{
 		yield return new WaitForSeconds(1.5f);
-		this.enabled = true;
+		speed = nonAggroSpeed;
+		lightHit = false;
 	}
 
 
