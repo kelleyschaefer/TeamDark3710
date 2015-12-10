@@ -32,16 +32,16 @@ public class ObjectFollow : MonoBehaviour {
 		if(currentlyHeld)
 		{
 			if(faceForward){
-				transform.position = new Vector3(player.position.x + holdOffset, player.position.y, player.position.z + -2);
+				transform.position = new Vector3(player.position.x + holdOffset, player.position.y, player.position.z);
 				// Object follows the player with specified offset position
 			}
 			else{
-				transform.position = new Vector3(player.position.x - holdOffset, player.position.y, player.position.z + -2);
+				transform.position = new Vector3(player.position.x - holdOffset, player.position.y, player.position.z);
 			}
 		}
 		else if(objectGrounded)
 		{
-			transform.position = new Vector3(objectGround.position.x - offsetX, objectGround.position.y + offsetY, objectGround.position.z - 2);
+			transform.position = new Vector3(objectGround.position.x - offsetX, objectGround.position.y + offsetY, objectGround.position.z);
 		}
 	
 	}

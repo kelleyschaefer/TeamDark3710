@@ -1,9 +1,11 @@
 fileFormatVersion: 2
-guid: 3a0eb9fa6b78a5541aa5c52d88c0cf07
-timeCreated: 1442296515
+guid: 26db7f676ce83c140ac295c2b9397cf0
+timeCreated: 1449723176
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Climb (1)_0
+    21300002: Climb (1)_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -30,25 +32,45 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     filterMode: -1
-    aniso: -1
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 256
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: Climb (1)_0
+      rect:
+        serializedVersion: 2
+        x: 429
+        y: 39
+        width: 412
+        height: 1232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Climb (1)_1
+      rect:
+        serializedVersion: 2
+        x: 1719
+        y: 39
+        width: 412
+        height: 1232
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
   assetBundleName: 

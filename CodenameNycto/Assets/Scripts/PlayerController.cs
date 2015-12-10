@@ -99,6 +99,8 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
+		/*
+		 * Currently unused Q and E pickup system (in case of game-breaking bugs)
 		//Drop key 
 		if(Input.GetKeyDown("q"))
 		{
@@ -110,6 +112,7 @@ public class PlayerController : MonoBehaviour {
 				{
 					playerLight.GetComponent<LightFollow>().followGround(_controller.ground.transform, true);
 					playerLight.GetComponent<LightFollow>().currentlyHeld = false;
+					_animator.setAnimation("Pick_Up_");
 				}
 				//If we're holding an object (should NOT be holding Lantern) then have Object follow the platform
 				else if(playerHolding != null)
@@ -117,6 +120,7 @@ public class PlayerController : MonoBehaviour {
 					playerHolding.GetComponent<ObjectFollow>().followGround(_controller.ground.transform, true);
 					playerHolding.GetComponent<ObjectFollow>().currentlyHeld = false;
 					playerHolding = null;
+					_animator.setAnimation("Pick_Up_");
 				}
 			}
 			//If not a moving platform, just place it down.
@@ -124,6 +128,7 @@ public class PlayerController : MonoBehaviour {
 			{
 				playerLight.GetComponent<LightFollow>().followGround(_controller.ground.transform, true);
 				playerLight.GetComponent<LightFollow>().currentlyHeld = false;
+				_animator.setAnimation("Pick_Up_");
 			}
 
 			//Otherwise, put object down on non-moving platform, mark it as not held.
@@ -132,6 +137,7 @@ public class PlayerController : MonoBehaviour {
 				playerHolding.GetComponent<ObjectFollow>().followGround(_controller.ground.transform,true);
 				playerHolding.GetComponent<ObjectFollow>().currentlyHeld = false;
 				playerHolding = null;
+				_animator.setAnimation("Pick_Up_");
 			}
 		}
 		//Pickup key
@@ -141,14 +147,76 @@ public class PlayerController : MonoBehaviour {
 			if(playerLight.GetComponent<LightFollow>().nearbyPlayer() && playerHolding == null)
 			{
 				playerLight.GetComponent<LightFollow>().currentlyHeld = true;
+				_animator.setAnimation("Pick_Up_");
 			}
 			//Else, if there is an object within range ot be picked up, pick it up.
 			else if(playerHolding == null && nearbyObject !=null)
 			{
 				playerHolding = nearbyObject;
 				playerHolding.GetComponent<ObjectFollow>().currentlyHeld = true;
+				_animator.setAnimation("Pick_Up_");
 			}
 		}
+		*/
+
+
+		if(Input.GetMouseButtonDown(0))
+		{
+			if(playerLight.GetComponent<LightFollow>().currentlyHeld)
+			{
+				//Holding light, and object close enough
+				if(nearbyObject != null)
+				{
+					playerHolding = nearbyObject;
+					playerHolding.GetComponent<ObjectFollow>().currentlyHeld = true;
+
+					playerLight.GetComponent<LightFollow>().followGround(_controller.ground.transform, true);
+					playerLight.GetComponent<LightFollow>().currentlyHeld = false;
+					_animator.setAnimation("Pick_Up_");
+				}
+				else
+				{
+						playerLight.GetComponent<LightFollow>().followGround(_controller.ground.transform, true);
+						playerLight.GetComponent<LightFollow>().currentlyHeld = false;
+						_animator.setAnimation("Pick_Up_");
+				}
+			}
+			else if (playerHolding != null)
+			{
+				if(playerLight.GetComponent<LightFollow>().nearbyPlayer ())
+				{
+					playerLight.GetComponent<LightFollow>().currentlyHeld = true;
+
+					playerHolding.GetComponent<ObjectFollow>().followGround(_controller.ground.transform, true);
+					playerHolding.GetComponent<ObjectFollow>().currentlyHeld = false;
+					playerHolding = null;
+					_animator.setAnimation("Pick_Up_");
+				}
+				else
+				{
+						playerHolding.GetComponent<ObjectFollow>().followGround(_controller.ground.transform, true);
+						playerHolding.GetComponent<ObjectFollow>().currentlyHeld = false;
+						playerHolding = null;
+						_animator.setAnimation("Pick_Up_");
+				}
+			}
+			else
+			{
+				if(playerLight.GetComponent<LightFollow>().nearbyPlayer ())
+				{
+					playerLight.GetComponent<LightFollow>().currentlyHeld = true;
+					_animator.setAnimation ("Pick_Up_");
+				}
+				else if(nearbyObject != null)
+				{
+					playerHolding = nearbyObject;
+					playerHolding.GetComponent<ObjectFollow>().currentlyHeld = true;
+					_animator.setAnimation("Pick_Up_");
+				}
+			}
+		}
+
+
 
 		//Facing left and not currently knocked back
 		if(Input.GetAxis("Horizontal") < 0 && !knockedBack && !onLadder)
@@ -187,19 +255,22 @@ public class PlayerController : MonoBehaviour {
 		}
 		if(Input.GetAxis("Jump") > 0 && _controller.isGrounded)
 		{
-			_animator.setAnimation("Jump");
+			_animator.setAnimation("Jump_1");
 			velocity.y = Mathf.Sqrt (2f * jumpHeight *-gravity);
 		}
 
 		if(Input.GetAxis ("Vertical") > 0 && !playerHolding && !playerLight.GetComponent<LightFollow>().currentlyHeld && nearLadder)
 		{
+			_animator.setAnimation("Climb");
 			onLadder = true;
 			Vector2 upVector = new Vector2(0, 5);
 			this.transform.Translate(upVector*Time.deltaTime);
+			velocity.y = 0;
 			gravity = 0;
 		}
 		if(Input.GetAxis("Vertical") < 0 && !playerHolding && !playerLight.GetComponent<LightFollow>().currentlyHeld && nearLadder)
 		{
+			_animator.setAnimation ("Climb");
 			_controller.ignoreOneWayPlatformsThisFrame = true;
 			velocity.y = -walkSpeed;
 		}

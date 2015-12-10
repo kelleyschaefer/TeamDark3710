@@ -62,7 +62,7 @@ public class LightFollow : MonoBehaviour {
 		}
 		else if(lightGrounded)
 		{
-			transform.position = new Vector3(lightGround.position.x - offsetX, lightGround.position.y + offsetY, lightGround.position.z - 2);
+			transform.position = new Vector3(lightGround.position.x - offsetX, lightGround.position.y + offsetY, -2f);
 		}
 	}
 
