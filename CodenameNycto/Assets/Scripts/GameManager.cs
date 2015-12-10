@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
 	private float width;
 	private List<string> unlockedLevels;
 	private Rect levelSelectWindow;
+	private Rect pauseWindow;
 	private bool paused;
 
 	// Use this for initializations
@@ -23,25 +24,26 @@ public class GameManager : MonoBehaviour {
 		unlockedLevels.Add("Tutorial");
 
 		toggleWindow = false;
+		paused = false;
 
 		width = Screen.width;
-		paused = false;
 		levelSelectWindow = new Rect((width/2 - ((width/3f))/2f),(Screen.height/8f),width/3f,width/4f);
+		pauseWindow = new Rect((width/2 - ((width/3f))/2f),(Screen.height/8f),width/3f,width/4f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-		if (Input.GetKeyDown(KeyCode.Escape)){
-			if (paused){
-				paused = false;
-				Time.timeScale = 1.0f;
-				Debug.Log("Unpausing");
-			}
-			else {
-				paused = true;
-				Time.timeScale = 0.0f;
-				Debug.Log("Pausing");
+		if (Application.loadedLevelName != "MainMenu"){
+			//pause behavior 
+			if (Input.GetKeyDown(KeyCode.Escape)){
+				if (paused){
+					paused = false;
+					Time.timeScale = 1.0f;
+				}
+				else {
+					paused = true;
+					Time.timeScale = 0.0f;
+				}
 			}
 		}
 	}
@@ -65,11 +67,15 @@ public class GameManager : MonoBehaviour {
 
 	void OnGUI(){
 		if(toggleWindow){
-			levelSelectWindow = GUI.Window (0, levelSelectWindow, window, "Level Select");
+			levelSelectWindow = GUI.Window (0, levelSelectWindow, levelWindowUI, "Level Select");
+		}
+
+		if(paused){
+			pauseWindow = GUI.Window (0, levelSelectWindow, pauseWindowUI, "Level Select");
 		}
 	}
 
-	void window(int windowID) {
+	void levelWindowUI(int windowID) {
 		if (GUILayout.Button("Tutorial")){
 			Application.LoadLevel(1);
 		}
@@ -81,6 +87,16 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
+	void pauseWindowUI(int windowID){
+		if (GUILayout.Button ("Restart")){
+			paused = false;
+			Application.LoadLevel (Application.loadedLevel);
+		}
+		if (GUILayout.Button ("Quit")){
+			Application.LoadLevel ("MainMenu");
+		}
+	}
+
 	public void LevelSelectPopulate(){
 		foreach (string s in unlockedLevels){
 
@@ -88,7 +104,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void RestartLevel(){
-		Application.LoadLevel(Application.loadedLevel);
+		Application.LoadLevel("Tutorial");
 	}
 
 	public void ExitLevel(){
