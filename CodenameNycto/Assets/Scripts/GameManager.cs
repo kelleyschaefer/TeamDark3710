@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void RestartLevel(){
-		Application.LoadLevel("Tutorial");
+		Application.LoadLevel(Application.loadedLevel);
 	}
 
 	public void ExitLevel(){
