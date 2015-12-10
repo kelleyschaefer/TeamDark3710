@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
 	private float width;
 	private List<string> unlockedLevels;
 	private Rect levelSelectWindow;
+	private bool paused;
 
 	// Use this for initializations
 	void Start () {
@@ -24,12 +25,25 @@ public class GameManager : MonoBehaviour {
 		toggleWindow = false;
 
 		width = Screen.width;
+		paused = false;
 		levelSelectWindow = new Rect((width/2 - ((width/3f))/2f),(Screen.height/8f),width/3f,width/4f);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
+		if (Input.GetKeyDown(KeyCode.Escape)){
+			if (paused){
+				paused = false;
+				Time.timeScale = 1.0f;
+				Debug.Log("Unpausing");
+			}
+			else {
+				paused = true;
+				Time.timeScale = 0.0f;
+				Debug.Log("Pausing");
+			}
+		}
 	}
 
 	public void LevelSelect(){
