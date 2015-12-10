@@ -36,15 +36,19 @@ public class GameManager : MonoBehaviour {
 		if (Application.loadedLevelName != "MainMenu"){
 			//pause behavior 
 			if (Input.GetKeyDown(KeyCode.Escape)){
-				if (paused){
-					paused = false;
-					Time.timeScale = 1.0f;
-				}
-				else {
-					paused = true;
-					Time.timeScale = 0.0f;
-				}
+				Pause ();
 			}
+		}
+	}
+
+	private void Pause(){
+		if (paused){
+			paused = false;
+			Time.timeScale = 1.0f;
+		}
+		else {
+			paused = true;
+			Time.timeScale = 0.0f;
 		}
 	}
 
@@ -89,10 +93,11 @@ public class GameManager : MonoBehaviour {
 
 	void pauseWindowUI(int windowID){
 		if (GUILayout.Button ("Restart")){
-			paused = false;
-			Application.LoadLevel (Application.loadedLevel);
+			Pause ();
+			RestartLevel();
 		}
 		if (GUILayout.Button ("Quit")){
+			Pause ();
 			Application.LoadLevel ("MainMenu");
 		}
 	}
