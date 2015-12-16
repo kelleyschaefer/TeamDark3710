@@ -5,8 +5,14 @@ public class CheckpointEffect : MonoBehaviour {
 	
 	public ParticleSystem[] Particles;
 
+	private AudioSource checkpointClip;
+	private bool playedClip;
+
 	// Use this for initialization
 	void Start () {
+		playedClip = false;
+		checkpointClip = this.GetComponent<AudioSource>();
+
 		if(PlayerPrefs.GetInt("Checkpoint") == 1)
 		{
 			Activate();
@@ -32,5 +38,12 @@ public class CheckpointEffect : MonoBehaviour {
 		{
 			Particles[i].enableEmission = true;
 		}
+
+		if(!playedClip)
+		{
+			checkpointClip.Play();
+			playedClip = true;
+		}
+
 	}
 }

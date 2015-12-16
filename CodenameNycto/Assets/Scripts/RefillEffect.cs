@@ -5,10 +5,11 @@ using System.Collections;
 public class RefillEffect : MonoBehaviour {
 
 	public ParticleSystem particle_;
+	private AudioSource lightClip;
 
 	// Use this for initialization
 	void Start () {
-
+		lightClip = this.GetComponent<AudioSource>();
 		particle_.enableEmission = false;
 	
 	}
@@ -17,6 +18,7 @@ public class RefillEffect : MonoBehaviour {
 	{
 		particle_.enableEmission = true;
 		StartCoroutine("stopParticle");
+		lightClip.Play ();
 		
 	}
 	

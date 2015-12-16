@@ -9,6 +9,8 @@ public class LampCollision : MonoBehaviour {
 	public bool NotLit;
 	public ParticleSystem[] Particles;
 
+	private AudioSource lightClip;
+
 	// Use this for initialization
 	void Start () {
 		if(NotLit)
@@ -27,6 +29,8 @@ public class LampCollision : MonoBehaviour {
 				Particles[i].enableEmission = true;
 			}
 		}
+
+		lightClip = this.GetComponent<AudioSource>();
 	
 	}
 	
@@ -43,5 +47,6 @@ public class LampCollision : MonoBehaviour {
 		{
 			Particles[i].enableEmission = true;
 		}
+		lightClip.Play ();
 	}
 }

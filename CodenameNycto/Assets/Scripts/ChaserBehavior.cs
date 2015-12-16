@@ -17,9 +17,17 @@ public class ChaserBehavior : MonoBehaviour {
 
 	public Vector2 _startPosition  = Vector2.zero;
 	public bool outgoing = true;
+
+	private AudioSource aggroClip;
+	private AudioSource pauseClip;
+
+	private bool aggroPlaying;
 	
 	// Use this for initialization
 	void Start () {
+
+		AudioSource[] sources = this.GetComponents<AudioSource>();
+		aggroClip = sources[0];
 		_startPosition = this.gameObject.transform.position;
 		//Slighty offset start position so the chaser doesn't immediately go left
 		_startPosition.x = _startPosition.x - .1f;
@@ -34,12 +42,19 @@ public class ChaserBehavior : MonoBehaviour {
 		}
 
 		lightHit = false;
+		aggroPlaying = false;
 		
 	}
 
 	//Update is called once per frame
 	void Update()
 	{
+
+		if(Vector2.Distance(this.transform.position, player.transform.position) < aggroDistance && !aggroPlaying)
+		{
+			aggroClip.Play ();
+			aggroPlaying = true;
+		}
 
 		if(Vector2.Distance(this.transform.position, player.transform.position) < aggroDistance && !lightHit)
 		{
@@ -59,12 +74,14 @@ public class ChaserBehavior : MonoBehaviour {
 			if(this.transform.position.x <= _startPosition.x)
 			{
 				this.transform.position = _startPosition;
-				speed = -nonAggroSpeed;
+				speed = nonAggroSpeed;
+				aggroPlaying = false;
 			}
 			else
 			{
 				this.transform.position = endPosition;
 				speed = -nonAggroSpeed;
+				aggroPlaying = false;
 			}
 		}
 		this.transform.Translate(speed, 0 , 0);

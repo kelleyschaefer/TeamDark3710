@@ -18,11 +18,19 @@ public class ObjectFollow : MonoBehaviour {
 	private bool objectGrounded;
 	public bool isKey;
 
+	private AudioSource pickupClip;
+	private AudioSource dropClip;
+	private AudioSource unlockClip;
+
 
 	// Use this for initialization
 	void Start () {
 		currentlyHeld = false;
 		objectGrounded = false;
+		AudioSource[] sources = this.GetComponents<AudioSource>();
+		dropClip = sources[0];
+		pickupClip = sources[1];
+		unlockClip = sources[2];
 	}
 	
 	// Update is called once per frame
@@ -50,7 +58,16 @@ public class ObjectFollow : MonoBehaviour {
 	{
 		objectGround = ground;
 		objectGrounded = status;
-		offsetX = ground.position.x - player.position.x;
+		if(status)
+		{
+			offsetX = ground.position.x - player.position.x;
+			//Play drop clip
+			dropClip.Play ();
+		}
+		else
+		{
+			pickupClip.Play ();
+		}
 	}
 
 	void OnTriggerEnter2D (Collider2D col)
@@ -59,7 +76,8 @@ public class ObjectFollow : MonoBehaviour {
 		if(col.tag == "Keyhole" && isKey)
 		{
 			col.gameObject.GetComponent<partnerObject>().activate();
-			Destroy (this.gameObject);
+			unlockClip.Play ();
+			StartCoroutine("waitDelete");
 		}
 	}
 
@@ -71,5 +89,11 @@ public class ObjectFollow : MonoBehaviour {
 		}
 		else
 			return false;
+	}
+
+	private IEnumerator waitDelete()
+	{
+		yield return new WaitForSeconds(unlockClip.clip.length);
+		Destroy(this.gameObject);
 	}
 }

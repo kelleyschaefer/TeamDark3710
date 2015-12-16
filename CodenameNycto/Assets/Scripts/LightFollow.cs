@@ -29,12 +29,21 @@ public class LightFollow : MonoBehaviour {
 	public Transform lightGround;
 	private bool lightGrounded;
 
+	private AudioSource dropClip;
+	private AudioSource pickupClip;
+	private AudioSource damageClip;
+
 	// Use this for initialization
 	void Start () {
 		currentlyHeld = true;
 		lightSource = GetComponent<Light>();
 		currentLight = maxLight;
 		lightSource.intensity = currentLight *1.0f;
+
+		AudioSource[] sources = this.GetComponents<AudioSource>();
+		dropClip = sources[0];
+		pickupClip = sources[1];
+		damageClip = sources[2];
 	}
 	
 	// Update is called once per frame
@@ -60,9 +69,11 @@ public class LightFollow : MonoBehaviour {
 			transform.position = new Vector3(player.position.x - holdOffsetx, player.position.y + holdOffsety, player.position.z + -2);
 			}
 		}
+
 		else if(lightGrounded)
 		{
 			transform.position = new Vector3(lightGround.position.x - offsetX, lightGround.position.y + offsetY, -2f);
+
 		}
 	}
 
@@ -70,7 +81,15 @@ public class LightFollow : MonoBehaviour {
 	{
 		lightGround = ground;
 		lightGrounded = status;
-		offsetX = (lightGround.position.x - player.position.x);
+		if(status)
+		{
+			offsetX = (lightGround.position.x - player.position.x);
+			dropClip.Play ();
+		}
+		else
+		{
+			pickupClip.Play ();
+		}
 	}
 
 	void OnTriggerEnter2D (Collider2D col)
@@ -95,7 +114,10 @@ public class LightFollow : MonoBehaviour {
 				player.GetComponent<PlayerController>().PlayerDamage(-lampHeal);
 			}
 
+			if(col.gameObject.GetComponent<LampCollision>().NotLit)
+			{
 			col.GetComponentInParent<LampCollision>().lightUp();
+			}
 		}
 		else if(col.tag == "TrickDamaging")
 		{
@@ -145,6 +167,10 @@ public class LightFollow : MonoBehaviour {
 
 	public void lightDamage(int damage)
 	{
+		if(damage > 0)
+		{
+			damageClip.Play ();
+		}
 		if(currentLight < 2 && damage > 0)
 		{
 			return;

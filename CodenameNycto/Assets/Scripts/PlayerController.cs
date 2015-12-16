@@ -37,13 +37,46 @@ public class PlayerController : MonoBehaviour {
 	public float knockbackY = 10;
 	public float knockbackDuration = 1;
 
+	private AudioSource walkClip;
+	private AudioSource jumpClip;
+	private AudioSource hurtClip;
+	private AudioSource levelClip;
+	private AudioSource ladderClip;
+	private AudioSource gameoverClip;
+
+	private bool playingClimb;
 
 	private GameObject nearbyObject;
+	private int walkWait;
+
+	public bool hardFloor;
+
 
 	// Use this for initialization
 	void Start () {
 		_controller = gameObject.GetComponent<CharacterController2D>();
 		_animator = gameObject.GetComponent<AnimationController2D>();
+
+		//Gather audio sources and set the private variables
+		AudioSource[] sources = this.GetComponents<AudioSource>();
+		if(hardFloor)
+		{
+			walkClip = sources[4];
+		}
+		else
+		{
+			walkClip = sources[0];
+		}
+
+		jumpClip = sources[2];
+		hurtClip = sources[1];
+		levelClip = sources[3];
+		ladderClip = sources[5];
+		gameoverClip = sources[6];
+
+		playingClimb = false;
+
+
 		currentHealth = maxHealth;
 
 		playerHolding = null;
@@ -55,22 +88,40 @@ public class PlayerController : MonoBehaviour {
 		{
 			this.transform.position = new Vector2(PlayerPrefs.GetFloat("xPosition"), PlayerPrefs.GetFloat("yPosition"));
 		}
+		walkWait = 0;
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
+		Vector3 velocity;
 		//If the player was knocked back, temporarily disable control for the duration
 		if(knockedBack)
 		{
 			StartCoroutine("waitKnockback");
 		}
 
+		if(!playingClimb && onLadder)
+		{
+			ladderClip.Play ();
+			playingClimb = true;
+		}
+
 		if(playerControl)
 		{
-			Vector3 velocity = PlayerInput();
+			velocity = PlayerInput();
 			_controller.move(velocity*Time.deltaTime);
+			if(_controller.isGrounded && _controller.ground!= null && velocity.magnitude >= 8f && walkWait >= 24)
+			{
+				//_audioPlayer.volume = Random.Range (0.25f, 5f);
+				walkClip.pitch = Random.Range (0.5f, .8f);
+				walkClip.Play();
+				walkWait = 0;
+			}
 		}
+		
+		walkWait++;
+
 	}
 
 	private Vector3 PlayerInput()
@@ -78,6 +129,8 @@ public class PlayerController : MonoBehaviour {
 		if(!nearLadder || _controller.isGrounded)
 		{
 			onLadder = false;
+			ladderClip.Stop ();
+			playingClimb = false;
 		}
 		if(!onLadder)
 		{
@@ -160,7 +213,7 @@ public class PlayerController : MonoBehaviour {
 		*/
 
 
-		if(Input.GetMouseButtonDown(0))
+		if(Input.GetMouseButtonUp(0))
 		{
 			if(playerLight.GetComponent<LightFollow>().currentlyHeld)
 			{
@@ -169,47 +222,35 @@ public class PlayerController : MonoBehaviour {
 				{
 					playerHolding = nearbyObject;
 					playerHolding.GetComponent<ObjectFollow>().currentlyHeld = true;
-
+				}
 					playerLight.GetComponent<LightFollow>().followGround(_controller.ground.transform, true);
 					playerLight.GetComponent<LightFollow>().currentlyHeld = false;
 					_animator.setAnimation("Pick_Up_");
-				}
-				else
-				{
-						playerLight.GetComponent<LightFollow>().followGround(_controller.ground.transform, true);
-						playerLight.GetComponent<LightFollow>().currentlyHeld = false;
-						_animator.setAnimation("Pick_Up_");
-				}
 			}
 			else if (playerHolding != null)
 			{
 				if(playerLight.GetComponent<LightFollow>().nearbyPlayer ())
 				{
+					playerLight.GetComponent<LightFollow>().followGround(null, false);
 					playerLight.GetComponent<LightFollow>().currentlyHeld = true;
-
+				}
 					playerHolding.GetComponent<ObjectFollow>().followGround(_controller.ground.transform, true);
 					playerHolding.GetComponent<ObjectFollow>().currentlyHeld = false;
 					playerHolding = null;
 					_animator.setAnimation("Pick_Up_");
-				}
-				else
-				{
-						playerHolding.GetComponent<ObjectFollow>().followGround(_controller.ground.transform, true);
-						playerHolding.GetComponent<ObjectFollow>().currentlyHeld = false;
-						playerHolding = null;
-						_animator.setAnimation("Pick_Up_");
-				}
 			}
 			else
 			{
 				if(playerLight.GetComponent<LightFollow>().nearbyPlayer ())
 				{
+					playerLight.GetComponent<LightFollow>().followGround(null, false);
 					playerLight.GetComponent<LightFollow>().currentlyHeld = true;
 					_animator.setAnimation ("Pick_Up_");
 				}
 				else if(nearbyObject != null)
 				{
 					playerHolding = nearbyObject;
+					playerHolding.GetComponent<ObjectFollow>().followGround(null, false);
 					playerHolding.GetComponent<ObjectFollow>().currentlyHeld = true;
 					_animator.setAnimation("Pick_Up_");
 				}
@@ -257,6 +298,11 @@ public class PlayerController : MonoBehaviour {
 		{
 			_animator.setAnimation("Jump_1");
 			velocity.y = Mathf.Sqrt (2f * jumpHeight *-gravity);
+			if(!jumpClip.isPlaying)
+			{
+				jumpClip.pitch = Random.Range (0.8f, 1.0f);
+				jumpClip.Play();
+			}
 		}
 
 		if(Input.GetAxis ("Vertical") > 0 && !playerHolding && !playerLight.GetComponent<LightFollow>().currentlyHeld && nearLadder)
@@ -271,6 +317,7 @@ public class PlayerController : MonoBehaviour {
 		if(Input.GetAxis("Vertical") < 0 && !playerHolding && !playerLight.GetComponent<LightFollow>().currentlyHeld && nearLadder)
 		{
 			_animator.setAnimation ("Climb");
+			onLadder = true;
 			_controller.ignoreOneWayPlatformsThisFrame = true;
 			velocity.y = -walkSpeed;
 		}
@@ -279,7 +326,6 @@ public class PlayerController : MonoBehaviour {
 		velocity.x *= 0.8f;
 		
 		velocity.y += gravity*Time.deltaTime;
-
 
 		return velocity;
 	}
@@ -353,6 +399,7 @@ public class PlayerController : MonoBehaviour {
 			RenderSettings.ambientLight = Color.red;
 			FinishedLevel.SetActive(true);
 			PlayerPrefs.SetInt("Checkpoint", 0);
+			levelClip.Play ();
 		}
 	}
 
@@ -378,12 +425,17 @@ public class PlayerController : MonoBehaviour {
 		gameCamera.GetComponent<CameraFollow>().stopFollow();
 		playerControl = false;
 		gameOverPanel.SetActive(true);
+		gameoverClip.Play ();
 	}
 
 	//Reduces player's health and transforms the healthbar.
 	//Also induces knockback and death if applicable.
 	public void PlayerDamage(int damage)
 	{
+		if(damage > 0)
+		{
+			hurtClip.Play ();
+		}
 		
 		if(currentHealth == maxHealth && damage < 0)
 		{
@@ -426,6 +478,7 @@ public class PlayerController : MonoBehaviour {
 		healthBar.GetComponent<Image>().sprite = healthBars[0];
 
 		gameOverPanel.SetActive(true);
+		gameoverClip.Play ();
 	}
 
 	//Knockback the player when taking damage (not lamp damage)
