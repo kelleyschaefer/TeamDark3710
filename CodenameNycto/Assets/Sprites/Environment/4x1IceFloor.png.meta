@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: e708fae768b43a24390b0697575622bd
-timeCreated: 1448348319
+guid: 070d58b7d3c2e6a46815a288b1e82789
+timeCreated: 1450296951
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -14,6 +14,16 @@ TextureImporter:
     21300014: iceplatform_sheet_7
     21300016: iceblock10x1
     21300018: iceplatform_sheet_9
+    21300020: 4x1SnowFloor_0
+    21300022: 4x1SnowFloor_1
+    21300024: 4x1SnowFloor_2
+    21300026: 4x1SnowFloor_3
+    21300028: 4x1SnowFloor_4
+    21300030: 4x1SnowFloor_5
+    21300032: 4x1SnowFloor_6
+    21300034: 4x1SnowFloor_7
+    21300036: 4x1SnowFloor_8
+    21300038: 4x1SnowFloor_9
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -47,7 +57,8 @@ TextureImporter:
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
-  spriteMode: 2
+  allowsAlphaSplitting: 0
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -59,7 +70,7 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: iceblock1x1
+    - name: 4x1SnowFloor_0
       rect:
         serializedVersion: 2
         x: 0
@@ -69,37 +80,37 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: iceblock2x1
+    - name: 4x1SnowFloor_1
       rect:
         serializedVersion: 2
-        x: 0
+        x: 64
         y: 0
-        width: 128
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: iceblock3x1
+    - name: 4x1SnowFloor_2
       rect:
         serializedVersion: 2
-        x: 0
+        x: 128
         y: 0
-        width: 192
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: iceblock4x1
+    - name: 4x1SnowFloor_3
       rect:
         serializedVersion: 2
-        x: 0
+        x: 192
         y: 0
-        width: 256
+        width: 64
         height: 64
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: iceplatform_sheet_4
+    - name: 4x1SnowFloor_4
       rect:
         serializedVersion: 2
         x: 256
@@ -107,19 +118,19 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: iceblock6x1
+    - name: 4x1SnowFloor_5
       rect:
         serializedVersion: 2
-        x: 0
+        x: 320
         y: 0
-        width: 384
+        width: 64
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: iceplatform_sheet_6
+    - name: 4x1SnowFloor_6
       rect:
         serializedVersion: 2
         x: 384
@@ -129,7 +140,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: iceplatform_sheet_7
+    - name: 4x1SnowFloor_7
       rect:
         serializedVersion: 2
         x: 448
@@ -139,17 +150,17 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: iceblock10x1
+    - name: 4x1SnowFloor_8
       rect:
         serializedVersion: 2
-        x: 0
+        x: 512
         y: 0
-        width: 640
+        width: 64
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: iceplatform_sheet_9
+    - name: 4x1SnowFloor_9
       rect:
         serializedVersion: 2
         x: 576
@@ -157,7 +168,7 @@ TextureImporter:
         width: 64
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
