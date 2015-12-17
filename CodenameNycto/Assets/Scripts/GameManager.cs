@@ -83,10 +83,30 @@ public class GameManager : MonoBehaviour {
 		if (GUILayout.Button("Tutorial")){
 			Application.LoadLevel(1);
 		}
-		if (GUILayout.Button ("Level 1")){
+		if (GUILayout.Button ("Castle Level 1")){
 			Application.LoadLevel (2);
 		}
-		if (GUILayout.Button ("Cancel")){
+        if (GUILayout.Button("Castle Level 2"))
+        {
+            Application.LoadLevel(3);
+        }
+        if (GUILayout.Button("Castle Level 3"))
+        {
+            Application.LoadLevel(4);
+        }
+        if (GUILayout.Button("Library Level 1"))
+        {
+            Application.LoadLevel(5);
+        }
+        if (GUILayout.Button("Library Level 2"))
+        {
+            Application.LoadLevel(6);
+        }
+        if (GUILayout.Button("Library Level 3"))
+        {
+            Application.LoadLevel(7);
+        }
+        if (GUILayout.Button ("Cancel")){
 			Application.LoadLevel ("MainMenu");
 		}
 	}
