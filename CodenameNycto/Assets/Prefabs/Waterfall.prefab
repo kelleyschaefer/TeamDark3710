@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 408730}
   - 212: {fileID: 21213460}
   - 61: {fileID: 6154654}
+  - 95: {fileID: 9567332}
   m_Layer: 10
   m_Name: Waterfall
   m_TagString: Waterfall
@@ -24,8 +25,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 139990}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 164.015793, y: 9.57200432, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 35.5106354, y: -4.23000002, z: 0}
+  m_LocalScale: {x: 1, y: 2.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -41,7 +42,24 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 1.61000001, y: 10.8000002}
+  m_Size: {x: 1.61000001, y: 3.4000001}
+--- !u!95 &9567332
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 139990}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fa134400eb7c61f43a129d70f55f8313, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!212 &21213460
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -65,8 +83,8 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 2
-  m_Sprite: {fileID: 21300000, guid: 08b9daea67a02a84b9cde4e2f758fa8c, type: 3}
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 779e03de00e8c23479f0623b8b38380b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: .619000018}
 --- !u!1001 &100100000
 Prefab:
@@ -82,6 +100,10 @@ Prefab:
         type: 3}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
