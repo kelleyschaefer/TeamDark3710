@@ -340,7 +340,7 @@ public class PlayerController : MonoBehaviour {
 		//Player touched something damaging
 		else if (col.tag == "Damaging" && !invincible)
 		{
-			PlayerDamage(1);
+			PlayerDamage(2);
 			if(playerLight.GetComponent<LightFollow>().currentlyHeld)
 			{
 			playerLight.GetComponent<LightFollow>().lightDamage(1);
@@ -349,7 +349,7 @@ public class PlayerController : MonoBehaviour {
 		//In this case, the player touched a trick obstacles -without- their lantern destroying it.
 		else if(col.tag == "TrickDamaging" && !invincible)
 		{
-			PlayerDamage(1);
+			PlayerDamage(2);
 
 			/*
 			 * Not actually necessary to damage light here
