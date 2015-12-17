@@ -389,12 +389,13 @@ public class PlayerController : MonoBehaviour {
 		}
 		//End of level!
 
-		if(col.tag == "Follower")
+		if(col.tag == "Follower" && !invincible)
 		{
 			PlayerDeath();
 		}
 		if(col.tag == "LevelGoal" && playerLight.GetComponent<LightFollow>().currentlyHeld)
 		{
+			invincible = true;
 			playerControl = false;
 			RenderSettings.ambientLight = Color.red;
 			FinishedLevel.SetActive(true);
@@ -421,6 +422,7 @@ public class PlayerController : MonoBehaviour {
 		currentHealth = 0;
 		_animator.setAnimation("Hurt");
 		playerControl = false;
+		invincible = true;
 		healthBar.GetComponent<Image>().sprite = healthBars[0];
 		gameCamera.GetComponent<CameraFollow>().stopFollow();
 		playerControl = false;
@@ -475,6 +477,7 @@ public class PlayerController : MonoBehaviour {
 	{
 		_animator.setAnimation("Hurt");
 		playerControl = false;
+		invincible = true;
 		healthBar.GetComponent<Image>().sprite = healthBars[0];
 
 		gameOverPanel.SetActive(true);
