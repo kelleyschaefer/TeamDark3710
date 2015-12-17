@@ -60,13 +60,15 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 793a666d73d273742a0b0ad83c158cc3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 69523b90034a0884aac0002fd61a399e, type: 3}
   m_Color: {r: .433823526, g: .433823526, b: .433823526, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -78,7 +80,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 793a666d73d273742a0b0ad83c158cc3,
+      objectReference: {fileID: 21300000, guid: 69523b90034a0884aac0002fd61a399e,
         type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

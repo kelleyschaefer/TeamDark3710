@@ -1,0 +1,42 @@
+Initialize engine version: 5.2.3f1 (f3d16a1fa2dd)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: NVIDIA GeForce GTX 970 (ID=0x13c2)
+    Vendor:   NVIDIA
+    VRAM:     4008 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: C:\Users\ChakLong\Documents\University of Utah\Film 3710\TeamDark3710\CodenameNycto\1_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading C:\Users\ChakLong\Documents\University of Utah\Film 3710\TeamDark3710\CodenameNycto\1_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: C:\Users\ChakLong\Documents\University of Utah\Film 3710\TeamDark3710\CodenameNycto\1_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading C:\Users\ChakLong\Documents\University of Utah\Film 3710\TeamDark3710\CodenameNycto\1_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: C:\Users\ChakLong\Documents\University of Utah\Film 3710\TeamDark3710\CodenameNycto\1_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\ChakLong\Documents\University of Utah\Film 3710\TeamDark3710\CodenameNycto\1_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\ChakLong\Documents\University of Utah\Film 3710\TeamDark3710\CodenameNycto\1_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\ChakLong\Documents\University of Utah\Film 3710\TeamDark3710\CodenameNycto\1_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\ChakLong\Documents\University of Utah\Film 3710\TeamDark3710\CodenameNycto\1_Data\Managed\UnityEngine.Networking.dll (this message is harmless)
+Loading C:\Users\ChakLong\Documents\University of Utah\Film 3710\TeamDark3710\CodenameNycto\1_Data\Managed\UnityEngine.Networking.dll into Unity Child Domain
+Platform assembly: C:\Users\ChakLong\Documents\University of Utah\Film 3710\TeamDark3710\CodenameNycto\1_Data\Managed\UnityEngine.UI.dll (this message is harmless)
+Loading C:\Users\ChakLong\Documents\University of Utah\Film 3710\TeamDark3710\CodenameNycto\1_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
+Platform assembly: C:\Users\ChakLong\Documents\University of Utah\Film 3710\TeamDark3710\CodenameNycto\1_Data\Managed\System.Core.dll (this message is harmless)
+- Completed reload, in  0.107 seconds
+desktop: 1920x1080 144Hz; virtual: 3000x2767 at -1080,-1687
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+Platform assembly: C:\Users\ChakLong\Documents\University of Utah\Film 3710\TeamDark3710\CodenameNycto\1_Data\Managed\System.dll (this message is harmless)
+Setting up 2 worker threads for Enlighten.
+  Thread -> id: 1a14 -> priority: 1 
+  Thread -> id: 14d4 -> priority: 1 
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 3.396786 ms
+
+Unloading 14 unused Assets to reduce memory usage. Loaded Objects now: 1088.
+Total: 0.383973 ms (FindLiveObjects: 0.045926 ms CreateObjectMapping: 0.017567 ms MarkObjects: 0.291619 ms  DeleteObjects: 0.017316 ms)
+
+Unloading 3 Unused Serialized files (Serialized files now loaded: 0)
+UnloadTime: 0.590516 ms
+
+Unloading 36 unused Assets to reduce memory usage. Loaded Objects now: 1242.
+Total: 0.432158 ms (FindLiveObjects: 0.050694 ms CreateObjectMapping: 0.014304 ms MarkObjects: 0.350093 ms  DeleteObjects: 0.016563 ms)
+
