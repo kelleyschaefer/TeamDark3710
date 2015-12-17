@@ -10,11 +10,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Complete Levels/Tutorial.unity
   - enabled: 1
-    path: Assets/Scenes/Complete Levels/Level1.unity
+    path: Assets/Scenes/Complete Levels/Set1-Castle/Castle_Level1.unity
   - enabled: 1
-    path: Assets/Scenes/Complete Levels/Level2.unity
+    path: Assets/Scenes/Complete Levels/Set1-Castle/Castle_Level2.unity
   - enabled: 1
-    path: Assets/Scenes/Complete Levels/Level3.unity
+    path: Assets/Scenes/Complete Levels/Set1-Castle/Castle_Level3.unity
   - enabled: 1
     path: Assets/Scenes/Complete Levels/Set2-Library/Library_Level1.unity
   - enabled: 1
