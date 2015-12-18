@@ -50,12 +50,14 @@ public class PlayerController : MonoBehaviour {
 	private int walkWait;
 
 	public bool hardFloor;
+	private bool paused;
 
 
 	// Use this for initialization
 	void Start () {
 		_controller = gameObject.GetComponent<CharacterController2D>();
 		_animator = gameObject.GetComponent<AnimationController2D>();
+		paused = false;
 
 		//Gather audio sources and set the private variables
 		AudioSource[] sources = this.GetComponents<AudioSource>();
@@ -126,6 +128,16 @@ public class PlayerController : MonoBehaviour {
 
 	private Vector3 PlayerInput()
 	{
+		//Pause functionality
+		if(Input.GetKey(KeyCode.Escape))
+		{
+			if(Time.timeScale > 0)
+			{
+				gameManager.GetComponent<GameManager>().Pause();
+				paused = true;
+			}
+		}
+
 		if(!nearLadder || _controller.isGrounded)
 		{
 			onLadder = false;
@@ -152,68 +164,8 @@ public class PlayerController : MonoBehaviour {
 			}
 		}
 
-		/*
-		 * Currently unused Q and E pickup system (in case of game-breaking bugs)
-		//Drop key 
-		if(Input.GetKeyDown("q"))
-		{
-			//if we're on a moving platform, we'll want to have it follow it too
-			if(_controller.isGrounded && _controller.ground!=null && _controller.ground.tag == "MovingPlatform")
-			{
-				//If we're not holding an object but holding the Lantern, have the Lantern follow
-				if(playerHolding == null && playerLight.GetComponent<LightFollow>().currentlyHeld)
-				{
-					playerLight.GetComponent<LightFollow>().followGround(_controller.ground.transform, true);
-					playerLight.GetComponent<LightFollow>().currentlyHeld = false;
-					_animator.setAnimation("Pick_Up_");
-				}
-				//If we're holding an object (should NOT be holding Lantern) then have Object follow the platform
-				else if(playerHolding != null)
-				{
-					playerHolding.GetComponent<ObjectFollow>().followGround(_controller.ground.transform, true);
-					playerHolding.GetComponent<ObjectFollow>().currentlyHeld = false;
-					playerHolding = null;
-					_animator.setAnimation("Pick_Up_");
-				}
-			}
-			//If not a moving platform, just place it down.
-			else if(playerLight.GetComponent<LightFollow>().currentlyHeld && _controller.ground!=null)
-			{
-				playerLight.GetComponent<LightFollow>().followGround(_controller.ground.transform, true);
-				playerLight.GetComponent<LightFollow>().currentlyHeld = false;
-				_animator.setAnimation("Pick_Up_");
-			}
 
-			//Otherwise, put object down on non-moving platform, mark it as not held.
-			else if(playerHolding != null && _controller.ground!=null)
-			{
-				playerHolding.GetComponent<ObjectFollow>().followGround(_controller.ground.transform,true);
-				playerHolding.GetComponent<ObjectFollow>().currentlyHeld = false;
-				playerHolding = null;
-				_animator.setAnimation("Pick_Up_");
-			}
-		}
-		//Pickup key
-		else if(Input.GetKeyDown("e"))
-		{
-			//If the Lantern is close enough to be picked up and player is not holding something, pick it up
-			if(playerLight.GetComponent<LightFollow>().nearbyPlayer() && playerHolding == null)
-			{
-				playerLight.GetComponent<LightFollow>().currentlyHeld = true;
-				_animator.setAnimation("Pick_Up_");
-			}
-			//Else, if there is an object within range ot be picked up, pick it up.
-			else if(playerHolding == null && nearbyObject !=null)
-			{
-				playerHolding = nearbyObject;
-				playerHolding.GetComponent<ObjectFollow>().currentlyHeld = true;
-				_animator.setAnimation("Pick_Up_");
-			}
-		}
-		*/
-
-
-		if(Input.GetMouseButtonUp(0))
+		if(Input.GetMouseButtonUp(0) && !paused)
 		{
 			if(playerLight.GetComponent<LightFollow>().currentlyHeld)
 			{

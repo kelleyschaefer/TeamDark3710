@@ -65,7 +65,6 @@ LightmapSettings:
     m_TextureCompression: 1
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
-    m_ReflectionCompression: 2
   m_LightmapSnapshot: {fileID: 0}
   m_RuntimeCPUUsage: 25
 --- !u!196 &4
@@ -85,6 +84,9 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!127 &5
+LevelGameManager:
+  m_ObjectHideFlags: 0
 --- !u!1001 &1450517
 Prefab:
   m_ObjectHideFlags: 0
@@ -2911,9 +2913,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -7391,9 +7391,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -7763,9 +7761,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -8781,9 +8777,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -8802,7 +8796,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 325781354}
-  m_RootOrder: 394
+  m_RootOrder: 199
 --- !u!4 &257676950 stripped
 Transform:
   m_PrefabParentObject: {fileID: 403044, guid: 70decfe1f7d87b243b712999b2f462e0, type: 2}
@@ -10289,9 +10283,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -11459,6 +11451,7 @@ Transform:
   - {fileID: 1734733132}
   - {fileID: 859712977}
   - {fileID: 631700127}
+  - {fileID: 256962501}
   - {fileID: 112215210}
   - {fileID: 1191342502}
   - {fileID: 690480424}
@@ -11582,6 +11575,7 @@ Transform:
   - {fileID: 597529153}
   - {fileID: 2066650778}
   - {fileID: 615842817}
+  - {fileID: 1744612165}
   - {fileID: 92895186}
   - {fileID: 820842701}
   - {fileID: 1318206174}
@@ -11654,7 +11648,6 @@ Transform:
   - {fileID: 320010250}
   - {fileID: 1627287659}
   - {fileID: 1253535755}
-  - {fileID: 256962501}
   - {fileID: 2426755}
   - {fileID: 1443148664}
   - {fileID: 582031949}
@@ -11723,7 +11716,6 @@ Transform:
   - {fileID: 1450206813}
   - {fileID: 1192422075}
   - {fileID: 1370218738}
-  - {fileID: 1744612165}
   - {fileID: 66956277}
   - {fileID: 1988952036}
   - {fileID: 991274834}
@@ -14595,9 +14587,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -18476,7 +18466,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 403044, guid: 70decfe1f7d87b243b712999b2f462e0, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -3.25
+      value: -3.47000003
       objectReference: {fileID: 0}
     - target: {fileID: 403044, guid: 70decfe1f7d87b243b712999b2f462e0, type: 2}
       propertyPath: m_LocalPosition.z
@@ -18942,9 +18932,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -46628,7 +46616,7 @@ MonoBehaviour:
   m_Script: {fileID: 1997211142, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ForceModuleActive: 0
+  m_AllowActivationOnStandalone: 0
 --- !u!114 &1327724824
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46646,7 +46634,7 @@ MonoBehaviour:
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: .5
-  m_ForceModuleActive: 0
+  m_AllowActivationOnMobileDevice: 0
 --- !u!114 &1327724825
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56408,9 +56396,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -56768,9 +56754,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -60426,9 +60410,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -61080,9 +61062,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -62010,9 +61990,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -62031,7 +62009,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 325781354}
-  m_RootOrder: 463
+  m_RootOrder: 323
 --- !u!1001 &1746196886
 Prefab:
   m_ObjectHideFlags: 0
@@ -62860,9 +62838,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -63269,7 +63245,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 403044, guid: 70decfe1f7d87b243b712999b2f462e0, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -.0900000036
+      value: -.219999999
       objectReference: {fileID: 0}
     - target: {fileID: 403044, guid: 70decfe1f7d87b243b712999b2f462e0, type: 2}
       propertyPath: m_LocalPosition.z
@@ -68315,9 +68291,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -72929,9 +72903,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -75634,7 +75606,6 @@ Camera:
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
-  m_TargetEye: 3
   m_HDR: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -75703,9 +75674,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -75846,7 +75815,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 440688, guid: 47ad3cefafae66149988fe90b20e4b48, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -7.03000021
+      value: -7.09000015
       objectReference: {fileID: 0}
     - target: {fileID: 440688, guid: 47ad3cefafae66149988fe90b20e4b48, type: 2}
       propertyPath: m_LocalPosition.z
@@ -76194,7 +76163,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 432500, guid: 20b76e123fc6bf04b9714b311f3680a8, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -6.73000002
+      value: -6.82000017
       objectReference: {fileID: 0}
     - target: {fileID: 432500, guid: 20b76e123fc6bf04b9714b311f3680a8, type: 2}
       propertyPath: m_LocalPosition.z

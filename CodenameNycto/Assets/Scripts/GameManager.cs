@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour {
 		}
 	}
 
-	private void Pause(){
+	public void Pause(){
 		if (paused){
 			paused = false;
 			Time.timeScale = 1.0f;
@@ -112,6 +112,10 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void pauseWindowUI(int windowID){
+		if(GUILayout.Button("Continue"))
+		{
+			Pause ();
+		}
 		if (GUILayout.Button ("Restart")){
 			Pause ();
 			RestartLevel();
