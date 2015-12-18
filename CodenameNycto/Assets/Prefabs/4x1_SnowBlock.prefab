@@ -41,7 +41,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 8, y: 1}
+  m_Size: {x: 4, y: 1}
 --- !u!212 &21206610
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -60,13 +60,15 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 070d58b7d3c2e6a46815a288b1e82789, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2de0c3961dafdda468399031cbeac2fe, type: 3}
   m_Color: {r: .433823526, g: .433823526, b: .433823526, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -78,8 +80,12 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 070d58b7d3c2e6a46815a288b1e82789,
+      objectReference: {fileID: 21300000, guid: 2de0c3961dafdda468399031cbeac2fe,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Size.x
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 112058}

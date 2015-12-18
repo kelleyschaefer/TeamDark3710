@@ -11,7 +11,7 @@ GameObject:
   - 212: {fileID: 21206610}
   - 61: {fileID: 6138946}
   m_Layer: 8
-  m_Name: 4x1_CobbleBlock
+  m_Name: 8x1_IceBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 4, y: 1}
+  m_Size: {x: 8, y: 1}
 --- !u!212 &21206610
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -68,7 +68,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0c5ec5d3e3c799046b8de6d250c4cd6c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e708fae768b43a24390b0697575622bd, type: 3}
   m_Color: {r: .433823526, g: .433823526, b: .433823526, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -80,12 +80,8 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 0c5ec5d3e3c799046b8de6d250c4cd6c,
+      objectReference: {fileID: 21300000, guid: e708fae768b43a24390b0697575622bd,
         type: 3}
-    - target: {fileID: 0}
-      propertyPath: m_Size.x
-      value: 4
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 112058}
