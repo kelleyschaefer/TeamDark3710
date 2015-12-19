@@ -55,7 +55,10 @@ public class ButtonObject : MonoBehaviour {
 		{
 				if(col.tag == "Object")
 				{
+					if(!col.gameObject.GetComponent<ObjectFollow>().isKey)
+					{
 					objectLeft = false;
+					}
 				}
 				else if (col.tag == "Player")
 				{

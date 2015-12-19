@@ -6661,7 +6661,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 403596, guid: 2a971ab4529540246bd6bfcccf220aa8, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -8.64999962
+      value: -8.76000023
       objectReference: {fileID: 0}
     - target: {fileID: 403596, guid: 2a971ab4529540246bd6bfcccf220aa8, type: 2}
       propertyPath: m_LocalPosition.y
@@ -6689,7 +6689,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 403596, guid: 2a971ab4529540246bd6bfcccf220aa8, type: 2}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 11462902, guid: 2a971ab4529540246bd6bfcccf220aa8, type: 2}
       propertyPath: gameOverPanel

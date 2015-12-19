@@ -11,17 +11,17 @@ public class GameManager : MonoBehaviour {
 	
 	private bool toggleWindow;
 	private float width;
-	private List<string> unlockedLevels;
 	private Rect levelSelectWindow;
 	private Rect pauseWindow;
 	private bool paused;
 
+	private string[] Levels = {"Tutorial", "Castle Level 1", "Castle Level 2", "Castle Level 3", "Library Level 1", "Library Level 2",
+		"Library Level 3", "Library Finale"};
+
 	// Use this for initializations
 	void Start () {
-		unlockedLevels = new List <string>();
-		//unlockedLevels.Add("PrototypeLevel");
-		//unlockedLevels.Add("Level1");
-		unlockedLevels.Add("Tutorial");
+		//PlayerPrefs.DeleteAll (); //For resetting unlocked levels
+		PlayerPrefs.SetInt("Tutorial", 1);
 
 		toggleWindow = false;
 		paused = false;
@@ -80,6 +80,8 @@ public class GameManager : MonoBehaviour {
 	}
 
 	void levelWindowUI(int windowID) {
+		LevelSelectPopulate();
+		/*
 		if (GUILayout.Button("Tutorial")){
 			Application.LoadLevel(1);
 		}
@@ -106,9 +108,12 @@ public class GameManager : MonoBehaviour {
         {
             Application.LoadLevel(7);
         }
-        if (GUILayout.Button ("Cancel")){
-			Application.LoadLevel ("MainMenu");
+		if (GUILayout.Button ("Library Finale"))
+		{
+			Application.LoadLevel(8);
 		}
+
+		*/
 	}
 
 	void pauseWindowUI(int windowID){
@@ -127,8 +132,17 @@ public class GameManager : MonoBehaviour {
 	}
 
 	public void LevelSelectPopulate(){
-		foreach (string s in unlockedLevels){
+		foreach (string s in Levels){
+			if(PlayerPrefs.HasKey(s))
+			   {
+					if (GUILayout.Button(s)){
+						Application.LoadLevel(PlayerPrefs.GetInt(s));
+					}
+				}
 
+		}
+		if (GUILayout.Button ("Cancel")){
+			Application.LoadLevel ("MainMenu");
 		}
 	}
 
@@ -154,7 +168,13 @@ public class GameManager : MonoBehaviour {
 	public void SaveExit(){
 		/*
 		 * TODO: Save file */
+		int level = Application.loadedLevel;
+		
+		
+		//ORGANIZE LEVELS BY NUMBER, VERY IMPORTANT
 		PlayerPrefs.SetInt ("Checkpoint", 0);
+		
+		PlayerPrefs.SetInt(Levels[level], level+1);
 		Application.Quit ();
 	}
 
@@ -166,15 +186,24 @@ public class GameManager : MonoBehaviour {
 
 		//ORGANIZE LEVELS BY NUMBER, VERY IMPORTANT
 		PlayerPrefs.SetInt ("Checkpoint", 0);
+
+		PlayerPrefs.SetInt(Levels[level], level+1);
 		level++;
+
 		Application.LoadLevel(level);
 	}
 
 	public void SaveMenu(){
 		/*
 		 * TODO: Save file */
+		int level = Application.loadedLevel;
 		PlayerPrefs.SetInt ("Checkpoint", 0);
+		
+		PlayerPrefs.SetInt(Levels[level], level+1);
+
 		Application.LoadLevel ("MainMenu");
+
+
 	}
 }
 
